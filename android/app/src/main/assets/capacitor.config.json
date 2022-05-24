@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "e-SCAMBO",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
