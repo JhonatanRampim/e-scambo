@@ -1,0 +1,7 @@
+{
+  "name": "e-SCAMBO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
