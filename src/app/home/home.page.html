@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,6 +7,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content color="medium">
+  <div class="container">
+    <ion-card>
+      <ion-item href="#" class="ion-activated">
+        <ion-icon name="wifi-outline" slot="start"></ion-icon>
+        <ion-label>Card Link Item 1 activated</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item href="#">
+        <ion-icon name="wine-outline" slot="start"></ion-icon>
+        <ion-label>Card Link Item 2</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-icon name="warning-outline" slot="start"></ion-icon>
+        <ion-label>Card Button Item 1 activated</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-icon name="walk-outline" slot="start"></ion-icon>
+        <ion-label>Card Button Item 2</ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
 </ion-content>
