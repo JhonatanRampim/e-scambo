@@ -13,7 +13,7 @@
       <ion-card>
         <ion-grid>
           <ion-row class="ion-justify-content-center">
-            <ion-col size="12">
+            <ion-col size="12" size-sm="6" size-md="6" size-lg="6">
               <img src={{movel.thumbnail.path}}/>
             </ion-col>
             <ion-col>
@@ -29,6 +29,7 @@
               </ion-row>
               <ion-row>
                 <ion-button shape="round" fill="outline">Saber Mais</ion-button>
+              
               </ion-row>
             </ion-col>
           </ion-row>
@@ -36,4 +37,11 @@
       </ion-card>
     </ion-row>
   </div>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+        <ion-route url="/new" component="new-announce"></ion-route>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>

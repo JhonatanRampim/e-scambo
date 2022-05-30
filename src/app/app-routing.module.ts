@@ -4,8 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'new',
+    loadChildren: () => import('./pages/new-announce/new-announce.module').then( m => m.NewAnnouncePageModule)
   }
+
 ];
 @NgModule({
   imports: [
