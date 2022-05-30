@@ -9,38 +9,31 @@
 
 <ion-content color="medium">
   <div class="container">
-    <ion-card>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6">
-            <ion-thumbnail>
-              <ion-img src="https://img.olx.com.br/images/83/832279274299273.jpg"></ion-img>
-            </ion-thumbnail>
-          </ion-col>
-          <ion-col>
-            <ion-row>
-              <h2>Sofá cama Caster, pronta entrega</h2>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-text>
-                  <p>ACEITAMOS CARTÃO DE CRÉDITO E PARCELAMOS
-
-                    EM ATÉ 12x SEM JUROS
-                    ACEITAMOS PAGAMENTO VIA PICPAY
-
-                    NOVIDADE ACEITAMOS CARTÃO SENF EM ATÉ 3X SEM JUROS.
-
-                    OBS: VALORES SUJEITOS A ALTERAÇÃO A QUALQUER MOMENTO DEVIDO A DEMANDA DE FALTA DE MATERIA PRIMA</p>
-                </ion-text>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-button shape="round" fill="outline">Saber Mais</ion-button>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
+    <ion-row *ngFor="let movel of moveis">
+      <ion-card>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12">
+              <img src={{movel.thumbnail.path}}/>
+            </ion-col>
+            <ion-col>
+              <ion-row>
+                <h2>{{movel.title}}</h2>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-text>
+                    <p>{{movel.description}}</p>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-button shape="round" fill="outline">Saber Mais</ion-button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-row>
   </div>
 </ion-content>
