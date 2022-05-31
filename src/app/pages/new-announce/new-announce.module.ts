@@ -8,6 +8,10 @@ import { NewAnnouncePageRoutingModule } from './new-announce-routing.module';
 
 import { NewAnnouncePage } from './new-announce.page';
 
+import {MatCardModule} from '@angular/material/card'; 
+
+import {MatGridListModule} from '@angular/material/grid-list'; 
+
 @NgModule({
   imports: [
     CommonModule,
