@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   passwordType = 'password';
-  passwordIcon = 'eye-off';
+  passwordIcon = 'visibility';
   loginForm: FormGroup;
   isSubmitted = false;
   isLoading: boolean;
@@ -17,10 +17,6 @@ export class LoginPage implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
     private router: Router,) { }
-
-  get errorControl() {
-    return this.loginForm.controls;
-  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -31,7 +27,7 @@ export class LoginPage implements OnInit {
 
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    this.passwordIcon = this.passwordIcon === 'visibility' ? 'visibility_off' : 'visibility';
   }
   enterSubmit($event) {
     if ($event.keyCode === 13) {
@@ -40,6 +36,8 @@ export class LoginPage implements OnInit {
   }
   submitForm() {
     this.isSubmitted = true;
+    console.log(this.loginForm.value.login);
+    console.log(this.loginForm.value.pass);
   }
 
 }

@@ -17,7 +17,8 @@
               <mat-form-field appearance="standard">
                 <mat-label>Senha</mat-label>
                 <input matInput formControlName="pass" [type]="passwordType" />
-                <button matSuffix (click)="hideShowPassword()">Change</button>
+                <mat-icon matSuffix style="cursor: pointer;" (click)="hideShowPassword()">
+                  {{passwordIcon}}</mat-icon>
               </mat-form-field>
             </ion-col>
           </ion-row>
