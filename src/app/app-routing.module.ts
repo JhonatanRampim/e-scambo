@@ -13,7 +13,12 @@ const routes: Routes = [
   {
     path: 'new',
     loadChildren: () => import('./pages/new-announce/new-announce.module').then( m => m.NewAnnouncePageModule)
+  },
+  {
+    path: 'consulta-anuncios',
+    loadChildren: () => import('./pages/consulta-anuncios/consulta-anuncios.module').then( m => m.ConsultaAnunciosPageModule)
   }
+
 
 ];
 @NgModule({

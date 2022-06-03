@@ -1,0 +1,26 @@
+<ion-content color="medium">
+  <ion-row *ngFor="let movel of moveis" style="display: flex;justify-content: center;">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+            <img src={{movel.thumbnail.path}} />
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <h2>{{movel.title}}</h2>
+            </ion-row>
+            <ion-row>
+              <ion-text>
+                {{movel.description}}
+              </ion-text>
+            </ion-row>
+            <ion-row>
+              <ion-button shape="round" fill="outline">Saber Mais</ion-button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-row>
+</ion-content>
