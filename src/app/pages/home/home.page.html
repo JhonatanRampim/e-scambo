@@ -8,40 +8,35 @@
 </ion-header>
 
 <ion-content color="medium">
-  <div class="container">
-    <ion-row *ngFor="let movel of moveis">
-      <ion-card>
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-col size="12" size-sm="6" size-md="6" size-lg="6">
-              <img src={{movel.thumbnail.path}}/>
-            </ion-col>
-            <ion-col>
-              <ion-row>
-                <h2>{{movel.title}}</h2>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <ion-text>
-                    <p>{{movel.description}}</p>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-button shape="round" fill="outline">Saber Mais</ion-button>
-              
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card>
-    </ion-row>
-  </div>
+  <ion-row *ngFor="let movel of moveis" style="display: flex;justify-content: center;">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm="12" size-md="6" size-lg="6">
+            <img src={{movel.thumbnail.path}} />
+          </ion-col>
+          <ion-col>
+            <ion-row>
+              <h2>{{movel.title}}</h2>
+            </ion-row>
+            <ion-row>
+              <ion-text>
+                {{movel.description}}
+              </ion-text>
+            </ion-row>
+            <ion-row>
+              <ion-button shape="round" fill="outline">Saber Mais</ion-button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-row>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button routerLink="/new">
-        <ion-icon name="add"></ion-icon>
-        <ion-route url="/new" component="new-announce"></ion-route>
-      </ion-fab-button>
-    </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/new">
+      <ion-icon name="add"></ion-icon>
+      <ion-route url="/new" component="new-announce"></ion-route>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

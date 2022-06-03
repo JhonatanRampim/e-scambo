@@ -14,11 +14,11 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.moveis = [
       {
-        id:1, 
-        title:'Sofá cama Caster, pronta entrega', 
+        id:1,
+        title:'Sofá cama Caster, pronta entrega',
         description:'ACEITAMOS CARTÃO DE CRÉDITO E PARCELAMOS EM ATÉ 12x SEM JUROS ACEITAMOS PAGAMENTO VIA PICPAY NOVIDADE ACEITAMOS CARTÃO SENF EM ATÉ 3X SEM JUROS. OBS: VALORES SUJEITOS A ALTERAÇÃO A QUALQUER MOMENTO DEVIDO A DEMANDA DE FALTA DE MATERIA PRIMA', 
-        createdAt:'2022-05-29 20:14', 
-        updatedAt:'2022-05-29 20:14', 
+        createdAt:'2022-05-29 20:14',
+        updatedAt:'2022-05-29 20:14',
         thumbnail: {id:1, path:'https://img.olx.com.br/images/83/832279274299273.jpg'}
       },
       {
