@@ -4,15 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { NewAnnouncePageRoutingModule } from './new-announce-routing.module';
-
-import { NewAnnouncePage } from './new-announce.page';
+import { LoginPageRoutingModule } from './login-routing.module';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { MaterialFileInputModule } from 'ngx-material-file-input';
+
+import { LoginPage } from './login.page';
 
 @NgModule({
   imports: [
@@ -23,9 +22,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
-    MaterialFileInputModule,
-    NewAnnouncePageRoutingModule
+    LoginPageRoutingModule
   ],
-  declarations: [NewAnnouncePage],
+  declarations: [LoginPage]
 })
-export class NewAnnouncePageModule {}
+export class LoginPageModule {}

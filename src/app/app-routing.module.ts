@@ -17,7 +17,11 @@ const routes: Routes = [
   {
     path: 'consulta-anuncios',
     loadChildren: () => import('./pages/consulta-anuncios/consulta-anuncios.module').then( m => m.ConsultaAnunciosPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
+
 
 
 ];
