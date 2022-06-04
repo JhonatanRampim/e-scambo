@@ -23,8 +23,10 @@
             </ion-col>
           </ion-row>
           <div class="buttons">
-            <ion-button *ngIf="!isLoading" type="submit" color="primary" style="margin-top: 10px; border-radius: 20px;">
-              <span style="padding: 0px 65px 0px 65px">Entrar</span></ion-button>
+            <ion-button *ngIf="!isLoading" type="submit" color="secondary"
+              style="margin-top: 10px; border-radius: 20px;" fill="outline">
+              Entrar</ion-button>
+            <p>Não possui acesso? <a href="#" color="secondary">CADASTRE-SE</a></p>
             <div style="text-align: center; padding: 0px 65px 0px 65px;margin-top: 10px;">
               <ion-spinner *ngIf="isLoading"></ion-spinner>
             </div>
