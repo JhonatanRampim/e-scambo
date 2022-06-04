@@ -8,7 +8,14 @@
           </ion-col>
           <ion-col>
             <ion-row>
-              <h2>{{movel.title}}</h2>
+              <ion-col>
+                <h2>{{movel.title}}</h2>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="text-align: right;">
+                <p>Publicado em: {{movel.createdAt | date: 'dd/MM/yyyy'}}</p>
+              </ion-col>
             </ion-row>
             <ion-row>
               <ion-text>
@@ -16,7 +23,7 @@
               </ion-text>
             </ion-row>
             <ion-row>
-              <ion-button shape="round" fill="outline">Saber Mais</ion-button>
+              <ion-button shape="round" fill="outline" (click)="verDetalhes(movel.id)" >Saber Mais</ion-button>
             </ion-row>
           </ion-col>
         </ion-row>
