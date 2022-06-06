@@ -8,12 +8,24 @@ import { DetalheAnuncioPageRoutingModule } from './detalhe-anuncio-routing.modul
 
 import { DetalheAnuncioPage } from './detalhe-anuncio.page';
 
+import { GalleryModule, GALLERY_CONFIG } from 'ng-gallery';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    GalleryModule,
     DetalheAnuncioPageRoutingModule
+  ],
+  providers: [
+    {
+      provide: GALLERY_CONFIG,
+      useValue: {
+        dots: true,
+        imageSize: 'cover'
+      }
+    }
   ],
   declarations: [DetalheAnuncioPage]
 })

@@ -1,9 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>detalhe-anuncio</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <p>{{movel.title}}</p>
+
+<ion-content color="medium" >
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header >
+          <h2>{{movel.title}}</h2>
+          <p>Publicado em: {{movel.createdAt | date: 'dd/MM/yyyy'}}</p>
+        </ion-card-header>
+        <ion-card-content style="text-align: center;">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <gallery [items]="images" thumbPosition="right"></gallery>   
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <p style="text-align:left;">
+                  Sobre: {{movel.description}}
+                </p>
+              </ion-col>
+           
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

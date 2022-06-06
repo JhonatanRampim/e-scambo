@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
 
@@ -10,6 +11,7 @@ import { IMovel } from 'src/app/shared/model/movel.interface';
 })
 export class DetalheAnuncioPage implements OnInit {
   movel: IMovel;
+  images: GalleryItem[] = [];
   constructor(
     public movelService: MovelService,
     private route: ActivatedRoute
@@ -17,7 +19,9 @@ export class DetalheAnuncioPage implements OnInit {
 
   ngOnInit() {
     this.movel = this.movelService.getMovelAnuncio(Number(this.route.snapshot.paramMap.get('id')))
-    console.log(this.movel);
+    this.movel.thumbnail.forEach((picture) => {
+      this.images.push(new ImageItem({ src: picture.path, thumb: picture.path }),);
+    });
   }
 
 }

@@ -4,7 +4,7 @@ export interface IMovel {
     description:string,
     createdAt: string, 
     updatedAt: string,
-    thumbnail: IThumbnail
+    thumbnail: IThumbnail[]
 }
 export interface IThumbnail {
     id:number, 
