@@ -23,11 +23,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'detalhe-anuncio/:id', loadChildren: () => import('./pages/detalhe-anuncio/detalhe-anuncio.module').then( m => m.DetalheAnuncioPageModule)
-  }
-
-
-
+    path: 'detalhe-anuncio/:id',
+    loadChildren: () => import('./pages/detalhe-anuncio/detalhe-anuncio.module').then( m => m.DetalheAnuncioPageModule)
+  },
 ];
 @NgModule({
   imports: [
