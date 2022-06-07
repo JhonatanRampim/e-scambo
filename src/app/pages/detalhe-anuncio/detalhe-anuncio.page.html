@@ -6,28 +6,45 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content color="medium" >
+<ion-content color="medium">
   <ion-row class="ion-align-items-center">
     <ion-col size="12">
       <ion-card>
-        <ion-card-header >
+        <ion-card-header>
           <h2>{{movel.title}}</h2>
           <p>Publicado em: {{movel.createdAt | date: 'dd/MM/yyyy'}}</p>
         </ion-card-header>
-        <ion-card-content style="text-align: center;">
+        <ion-card-content>
           <ion-grid>
             <ion-row>
               <ion-col size="12">
-                <gallery [items]="images" thumbPosition="right"></gallery>   
+                <gallery [items]="images" thumbPosition="right"></gallery>
               </ion-col>
             </ion-row>
+            <h2>Detalhes</h2>
             <hr />
             <ion-row>
-              <ion-col>
+              <ion-col size="12">
                 <p style="text-align:left;">
-                  Sobre: {{movel.description}}
+                  {{movel.description}}
                 </p>
+              </ion-col>
+              <ion-col size="12">
+                <ion-chip outline *ngFor="let estado of movel.estado" color="primary">
+                  <ion-label>{{estado}}</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+            <h2>Local</h2>
+            <hr />
+            <ion-row>
+              <ion-col size="12">
+                <ion-chip outline color="secondary">
+                  <ion-label>{{movel.address.city}}</ion-label>
+                </ion-chip>
+                <ion-chip outline color="secondary">
+                  <ion-label>{{movel.address.state}}</ion-label>
+                </ion-chip>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -35,5 +52,9 @@
       </ion-card>
     </ion-col>
   </ion-row>
-
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
