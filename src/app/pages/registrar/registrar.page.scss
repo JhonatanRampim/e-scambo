@@ -1,0 +1,83 @@
+.align-form {
+  width: 100%;
+  padding: 50px 45px 0px 45px;
+}
+
+.passwordIcon {
+  font-size: 28px !important;
+  position: absolute !important;
+  top: 22px !important;
+  margin: 0 auto !important;
+  right: 0;
+}
+
+.item-interactive.ion-valid {
+  --highlight-background: #9d00bd;
+}
+
+mat-form-field {
+  font-family: 'Montserrat';
+  width: 100%;
+}
+
+.buttons {
+  text-align: center;
+}
+
+img {
+  object-fit: resize;
+  width: 300px !important;
+  margin-top: 30px;
+}
+
+::ng-deep .mat-form-field {
+  .mat-form-field-underline {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-ripple {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-required-marker {
+    color: var(--ion-color-secondary);
+  }
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-ripple {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-required-marker {
+    color: var(--ion-color-secondary);
+  }
+}
+
+a:link {
+  color: var(--ion-color-secondary);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--ion-color-secondary);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ion-color-secondary);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: var(--ion-color-secondary);
+  background-color: transparent;
+  text-decoration: underline;
+}

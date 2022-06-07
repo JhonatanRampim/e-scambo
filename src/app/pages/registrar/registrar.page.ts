@@ -1,0 +1,44 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-registrar',
+  templateUrl: './registrar.page.html',
+  styleUrls: ['./registrar.page.scss'],
+})
+export class RegistrarPage implements OnInit {
+  passwordType = 'password';
+  passwordIcon = 'visibility';
+  loginForm: FormGroup;
+  isSubmitted = false;
+  isLoading: boolean;
+  route: Router;
+  
+  constructor(public formBuilder: FormBuilder,
+    private router: Router,) { }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      login: ['', [Validators.required, Validators.minLength(2)]],
+      pass: ['', [Validators.required, Validators.minLength(2)]],
+    });
+  }
+
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'visibility' ? 'visibility_off' : 'visibility';
+  }
+  enterSubmit($event) {
+    if ($event.keyCode === 13) {
+      this.submitForm();
+    }
+  }
+  submitForm() {
+    this.isSubmitted = true;
+    console.log(this.loginForm.value.login);
+    console.log(this.loginForm.value.pass);
+  }
+
+
+}

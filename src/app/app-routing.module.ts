@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'detalhe-anuncio/:id',
     loadChildren: () => import('./pages/detalhe-anuncio/detalhe-anuncio.module').then( m => m.DetalheAnuncioPageModule)
+  },  {
+    path: 'registrar',
+    loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
   },
+
 ];
 @NgModule({
   imports: [
