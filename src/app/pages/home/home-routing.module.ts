@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConsultaAnunciosPage } from '../consulta-anuncios/consulta-anuncios.page';
 
 import { HomePage } from './home.page';
 
@@ -12,6 +11,10 @@ const routes: Routes = [
       {
         path: 'consulta-anuncios',
         loadChildren: () => import('../consulta-anuncios/consulta-anuncios.module').then(m => m.ConsultaAnunciosPageModule),
+      },
+      {
+        path: 'user-anuncio',
+        loadChildren: () => import('../user-anuncio/user-anuncio.module').then(m => m.UserAnuncioPageModule),
       },
       {
         path: '',
