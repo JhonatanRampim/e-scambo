@@ -1,4 +1,5 @@
 <ion-content color="medium">
+  <ion-searchbar *ngIf="showSearchBar" showClearButton="true" animated placeholder="Buscar móveis"></ion-searchbar>
   <ion-row *ngFor="let movel of moveis" style="display: flex;justify-content: center;">
     <ion-card>
       <ion-grid>
@@ -23,11 +24,16 @@
               </ion-text>
             </ion-row>
             <ion-row>
-              <ion-button shape="round" fill="outline" (click)="verDetalhes(movel.id)" >Saber Mais</ion-button>
+              <ion-button shape="round" fill="outline" (click)="verDetalhes(movel.id)">Saber Mais</ion-button>
             </ion-row>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card>
   </ion-row>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="enableSearchBar()" color="secondary">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
