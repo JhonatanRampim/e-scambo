@@ -1,19 +1,20 @@
-ion-col img  {
-    object-fit: resize;
-    height: auto;
-    width: auto !important;
-    border: 0;
-    padding: 0;
-    background-color: grey;
-    margin: auto;
+ion-col img {
+  object-fit: resize;
+  height: auto;
+  width: auto !important;
+  border: 0;
+  padding: 0;
+  background-color: grey;
+  margin: auto;
 }
+
 ion-card {
-    width: 90%;
+  width: 90%;
 }
 
 
-@media only screen  and (max-width: 767px) {
-    .col-image{
-        text-align: center;
-    }
+@media only screen and (max-width: 767px) {
+  .col-image {
+    text-align: center;
+  }
 }
