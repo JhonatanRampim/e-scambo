@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,11 @@ export class LoginPage implements OnInit {
   route: Router;
 
   constructor(public formBuilder: FormBuilder,
-    private router: Router,) { }
+    private router: Router,
+    public menuControler: MenuController) { }
 
   ngOnInit() {
+    this.menuControler.enable(false);
     this.loginForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(2)]],
       pass: ['', [Validators.required, Validators.minLength(2)]],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomValidators } from 'src/app/helpers/CustomValidators';
 
 @Component({
   selector: 'app-registrar',
@@ -10,19 +11,26 @@ import { Router } from '@angular/router';
 export class RegistrarPage implements OnInit {
   passwordType = 'password';
   passwordIcon = 'visibility';
-  loginForm: FormGroup;
   isSubmitted = false;
   isLoading: boolean;
   route: Router;
-  
-  constructor(public formBuilder: FormBuilder,
-    private router: Router,) { }
+  signUpForm = new FormGroup({
+    nome: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    email: new FormControl('', [Validators.required, Validators.minLength(2), Validators.email]),
+    confirmEmail: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(2)]),
+  }, [CustomValidators.mustMatch('password', 'confirmPassword'), CustomValidators.mustMatch('email', 'confirmEmail')]);
+
+  constructor(public fb: FormBuilder,
+    private router: Router) { }
+
+  get f() {
+    return this.signUpForm.controls;
+  }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      login: ['', [Validators.required, Validators.minLength(2)]],
-      pass: ['', [Validators.required, Validators.minLength(2)]],
-    });
+
   }
 
   hideShowPassword() {
@@ -36,8 +44,10 @@ export class RegistrarPage implements OnInit {
   }
   submitForm() {
     this.isSubmitted = true;
-    console.log(this.loginForm.value.login);
-    console.log(this.loginForm.value.pass);
+    if(this.signUpForm.invalid) {
+      return;
+    }
+    console.log(this.signUpForm.value);
   }
 
 

@@ -3,30 +3,59 @@
     <img src="./assets/images/logo.png" alt="">
     <ion-card-content>
       <ion-grid>
-        <form [formGroup]="loginForm" (ngSubmit)="submitForm()" (keydown)="enterSubmit($event)" novalidate>
+        <form [formGroup]="signUpForm" (ngSubmit)="submitForm()" (keydown)="enterSubmit($event)" novalidate>
+          <ion-row>
+            <ion-col size="12">
+              <mat-form-field appearance="standard">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput formControlName="nome" clearOnEdit="false" placeholder="Nome Completo" />
+              </mat-form-field>
+              <div class="error-validation" *ngIf="f.email.errors?.required && isSubmitted">Nome é obrigatório</div>
+            </ion-col>
+          </ion-row>
           <ion-row>
             <ion-col size="12">
               <mat-form-field appearance="standard">
                 <mat-label>Email</mat-label>
-                <input matInput formControlName="login" clearOnEdit="false" placeholder="E-mail" />
+                <input matInput formControlName="email" clearOnEdit="false" placeholder="E-mail" />
               </mat-form-field>
+              <div class="error-validation" *ngIf="f.email.errors?.required && isSubmitted">Email é obrigatório</div>
+            </ion-col>
+            <ion-col size="12">
+              <mat-form-field appearance="standard">
+                <mat-label>Confirmar Email</mat-label>
+                <input matInput formControlName="confirmEmail" clearOnEdit="false" placeholder="E-mail" />
+              </mat-form-field>
+              <div class="error-validation" *ngIf="f.confirmEmail.errors?.required && isSubmitted">Confirmar email é obrigatório</div>
+              <div class="error-validation" *ngIf="f.confirmEmail.errors?.mustMatch"> Os emails não combinam!</div>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
               <mat-form-field appearance="standard">
                 <mat-label>Senha</mat-label>
-                <input matInput formControlName="pass" [type]="passwordType" />
+                <input matInput formControlName="password" [type]="passwordType" />
                 <mat-icon matSuffix style="cursor: pointer;" (click)="hideShowPassword()">
                   {{passwordIcon}}</mat-icon>
               </mat-form-field>
+              <div class="error-validation" *ngIf="f.password.errors?.required && isSubmitted">Senha é obrigatório</div>
+            </ion-col>
+            <ion-col size="12">
+              <mat-form-field appearance="standard">
+                <mat-label>Confirmar Senha</mat-label>
+                <input matInput formControlName="confirmPassword" [type]="passwordType" /> 
+              </mat-form-field>
+              <div class="error-validation" *ngIf="f.confirmPassword.errors?.required && isSubmitted">Confirmar senha é obrigatório</div>
+              <div class="error-validation" *ngIf="f.confirmPassword.errors?.mustMatch"> As senhas não combinam!</div>
             </ion-col>
           </ion-row>
           <div class="buttons">
             <ion-button *ngIf="!isLoading" type="submit" color="secondary"
               style="margin-top: 10px; border-radius: 20px;" fill="outline">
-              Entrar</ion-button>
-            <p>Não possui acesso? <a href="/registrar" color="secondary">CADASTRE-SE</a></p>
+              CADASTRAR</ion-button>
+            <ion-button *ngIf="!isLoading" routerLink="/login" color="backbutton"
+              style="margin-top: 10px; border-radius: 20px;" fill="outline">
+              VOLTAR</ion-button>
             <div style="text-align: center; padding: 0px 65px 0px 65px;margin-top: 10px;">
               <ion-spinner *ngIf="isLoading"></ion-spinner>
             </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { IMovel } from '../../shared/model/movel.interface';
 
 @Component({
@@ -9,9 +10,12 @@ import { IMovel } from '../../shared/model/movel.interface';
 export class HomePage implements OnInit {
   moveis: IMovel[];
 
-  constructor() { }
+  constructor(
+    public menuControler: MenuController
+  ) { }
 
   ngOnInit() {
+    this.menuControler.enable(true);
   }
 
 }
