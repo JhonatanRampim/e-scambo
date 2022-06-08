@@ -21,32 +21,36 @@
                 <gallery [items]="images" thumbPosition="right"></gallery>
               </ion-col>
             </ion-row>
-            <h2>Detalhes</h2>
-            <hr />
-            <ion-row>
-              <ion-col size="12">
-                <p style="text-align:left;">
-                  {{movel.description}}
-                </p>
-              </ion-col>
-              <ion-col size="12">
-                <ion-chip outline *ngFor="let estado of movel.estado" color="primary">
-                  <ion-label>{{estado}}</ion-label>
-                </ion-chip>
-              </ion-col>
-            </ion-row>
-            <h2>Local</h2>
-            <hr />
-            <ion-row>
-              <ion-col size="12">
-                <ion-chip outline color="secondary">
-                  <ion-label>{{movel.address.city}}</ion-label>
-                </ion-chip>
-                <ion-chip outline color="secondary">
-                  <ion-label>{{movel.address.state}}</ion-label>
-                </ion-chip>
-              </ion-col>
-            </ion-row>
+            <div class="detalhes">
+              <h2>Detalhes</h2>
+              <hr />
+              <ion-row>
+                <ion-col size="12">
+                  <p style="text-align:left;">
+                    {{movel.description}}
+                  </p>
+                </ion-col>
+                <ion-col size="12">
+                  <ion-chip outline *ngFor="let estado of movel.estado" color="primary">
+                    <ion-label>{{estado}}</ion-label>
+                  </ion-chip>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="local" *ngIf="movel.address">
+              <h2>Local</h2>
+              <hr />
+              <ion-row>
+                <ion-col size="12">
+                  <ion-chip outline color="secondary">
+                    <ion-label>{{movel.address.city}}</ion-label>
+                  </ion-chip>
+                  <ion-chip outline color="secondary">
+                    <ion-label>{{movel.address.state}}</ion-label>
+                  </ion-chip>
+                </ion-col>
+              </ion-row>
+            </div>
           </ion-grid>
         </ion-card-content>
       </ion-card>
