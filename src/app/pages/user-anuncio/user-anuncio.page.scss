@@ -1,21 +1,25 @@
 ion-col img {
-    object-fit: resize;
-    height: auto;
-    width: auto !important;
-    border: 0;
-    padding: 0;
-    background-color: grey;
-    margin: auto;
+  object-fit: resize;
+  height: auto;
+  width: auto !important;
+  border: 0;
+  padding: 0;
+  background-color: grey;
+  margin: auto;
+}
+
+ion-card {
+  width: 90%;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .col-image {
+    text-align: center;
   }
-  
-  ion-card {
-    width: 90%;
-  }
-  
-  
-  @media only screen and (max-width: 767px) {
-    .col-image {
-      text-align: center;
-    }
-  }
-  
+}
+
+hr {
+  background-color: #b3b3b3;
+  margin-bottom: 35px;
+}

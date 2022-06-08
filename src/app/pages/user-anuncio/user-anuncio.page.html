@@ -1,50 +1,37 @@
 <ion-content color="medium">
-  <ion-row style="display: flex;justify-content: center;">
+  <div style="display: flex;justify-content: center;text-align: center;">
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
             <h2>Meus Anuncios</h2>
           </ion-col>
-          <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
-            <ion-list>
-              <ion-item>
-                <ion-thumbnail slot="start">
-                  <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
-                </ion-thumbnail>
-                <ion-label>
-                  <h2>Móvel Boladão</h2>
-                  <p>Excluir</p>
-                </ion-label>
-                <ion-button fill="outline" slot="end">Editar<ion-icon name="eye" slot="end"></ion-icon>
-                </ion-button>
-                <ion-button fill="outline" slot="end" color="danger">Excluir<ion-icon name="trash" slot="end">
-                  </ion-icon>
-                </ion-button>
-              </ion-item>
-              <ion-item>
-                <ion-thumbnail slot="start">
-                  <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
-                </ion-thumbnail>
-                <ion-label>
-                  <h2>Móvel Boladão</h2>
-                  <p>Excluir</p>
-                </ion-label>
-                <ion-button fill="outline" slot="end">Editar<ion-icon name="eye" slot="end"></ion-icon>
-                </ion-button>
-                <ion-button fill="outline" slot="end" color="danger">Excluir<ion-icon name="trash" slot="end">
-                  </ion-icon>
-                </ion-button>
-              </ion-item>
-            </ion-list>
-          </ion-col>
         </ion-row>
+        <div class="itens">
+          <ion-row>
+            <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
+              <h4>Sofá cama Caster, pronta entrega</h4>
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
+              <img src="https://img.olx.com.br/images/83/832279274299273.jpg" />
+            </ion-col>
+            <ion-col size="4" size-sm="12" size-md="4" size-lg="3">
+              <ion-button size="small" fill="outline">Editar<ion-icon name="pencil-outline" slot="end"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" size-sm="12" size-md="4" size-lg="3">
+              <ion-button size="small" fill="outline" color="danger">Excluir<ion-icon name="trash" slot="end">
+                </ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <hr />
+        </div>
       </ion-grid>
     </ion-card>
-  </ion-row>
-
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary"  routerLink="/new">
+    <ion-fab-button color="secondary" routerLink="/new">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
