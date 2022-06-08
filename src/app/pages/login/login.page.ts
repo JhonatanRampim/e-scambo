@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.menuControler.enable(false);
     this.loginForm = this.formBuilder.group({
-      login: ['', [Validators.required, Validators.minLength(2)]],
+      login: ['', [Validators.required, Validators.minLength(2), Validators.email]],
       pass: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
@@ -39,8 +39,10 @@ export class LoginPage implements OnInit {
   }
   submitForm() {
     this.isSubmitted = true;
-    console.log(this.loginForm.value.login);
-    console.log(this.loginForm.value.pass);
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.router.navigate(['/home']);
   }
 
 }
