@@ -35,12 +35,16 @@ export class AuthService {
       { name: data.nome, email: data.email, password: data.password, phone: data.phone })
       .pipe(map(signedUp => signedUp));
   }
-  logout(data?) {
+  logout() {
     return this.httpClient.get<any>(environment.apiUrl + '/logout')
       .pipe(map(user => {
         localStorage.removeItem('token');
         this.userSubject.next(false);
         return true;
       }));
+  }
+  check() {
+    return this.httpClient.get<any>(environment.apiUrl + '/check')
+      .pipe(map(checkedUser => checkedUser));
   }
 }
