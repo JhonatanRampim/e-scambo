@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { CustomValidators } from 'src/app/helpers/CustomValidators';
+import { RegistrarService } from 'src/app/services/registrar.service';
 
 @Component({
   selector: 'app-registrar',
@@ -20,10 +22,14 @@ export class RegistrarPage implements OnInit {
     confirmEmail: new FormControl('', [Validators.required, Validators.minLength(2)]),
     password: new FormControl('', [Validators.required, Validators.minLength(2)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(2)]),
   }, [CustomValidators.mustMatch('password', 'confirmPassword'), CustomValidators.mustMatch('email', 'confirmEmail')]);
 
+
   constructor(public fb: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    public registrarService: RegistrarService,
+    private alertController: AlertController) { }
 
   get f() {
     return this.signUpForm.controls;
@@ -42,12 +48,49 @@ export class RegistrarPage implements OnInit {
       this.submitForm();
     }
   }
+  async presentErrorAlert(message?) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Ops! Houve um erro :(',
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  async presentSuccessAlert(message?) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Eba! Cadastrado com Sucesso!!',
+      message: 'Bem vind@! Faça o login para começar.',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
   submitForm() {
     this.isSubmitted = true;
-    if(this.signUpForm.invalid) {
+    this.isLoading = true;
+    if (this.signUpForm.invalid) {
+      this.isLoading = false;
       return;
     }
-    console.log(this.signUpForm.value);
+    this.registrarService
+      .signup(this.signUpForm.value)
+      .subscribe(
+        async (data) => {
+          if (!data.success) {
+            this.isLoading = false;
+            this.presentErrorAlert(data.data);
+          }
+          await this.presentSuccessAlert();
+          this.isLoading = false;
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          this.isLoading = false;
+          this.presentErrorAlert(error.error.data);
+        }
+      );
+
   }
 
 
