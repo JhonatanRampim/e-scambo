@@ -1,7 +1,7 @@
 ion-col img {
   object-fit: resize;
-  height: auto;
-  width: auto !important;
+  height: 256px ;
+  width: 256px !important;
   border: 0;
   padding: 0;
   background-color: grey;
@@ -9,7 +9,7 @@ ion-col img {
 }
 
 ion-card {
-  width: 90%;
+  width: 50%;
 }
 
 

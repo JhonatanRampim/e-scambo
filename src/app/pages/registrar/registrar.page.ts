@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { CustomValidators } from 'src/app/helpers/CustomValidators';
-import { RegistrarService } from 'src/app/services/registrar.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registrar',
@@ -28,7 +28,7 @@ export class RegistrarPage implements OnInit {
 
   constructor(public fb: FormBuilder,
     private router: Router,
-    public registrarService: RegistrarService,
+    public registrarService: AuthService,
     private alertController: AlertController) { }
 
   get f() {

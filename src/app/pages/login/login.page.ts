@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,10 @@ export class LoginPage implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
     private router: Router,
-    public menuControler: MenuController) { }
+    public menuControler: MenuController,
+    public alertController: AlertController,
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.menuControler.enable(false);
@@ -37,12 +41,39 @@ export class LoginPage implements OnInit {
       this.submitForm();
     }
   }
+  async presentAlert(message?) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Ops! Houve um erro :(',
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
   submitForm() {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       return;
     }
-    this.router.navigate(['/home']);
+    this.authService
+    .login(this.loginForm.value)
+    .subscribe(
+      (data) => {
+        console.log(data);
+        if(!data.success) {
+          this.isLoading = false;
+          return this.presentAlert(data.data);
+        }
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        console.log(error);
+        this.isLoading = false;
+        this.presentAlert(error.error?.data);
+      }
+    );
+
   }
 
 }
