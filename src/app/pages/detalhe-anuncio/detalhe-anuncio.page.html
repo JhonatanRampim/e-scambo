@@ -11,8 +11,8 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <h2>{{movel.title}}</h2>
-          <p>Publicado em: {{movel.createdAt | date: 'dd/MM/yyyy'}}</p>
+          <h2>{{movel ? movel.name : ""}}</h2>
+          <p>Publicado em: {{ (movel) ? (movel.created_at | date: 'dd/MM/yyyy') : ""}}</p>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
@@ -27,17 +27,17 @@
               <ion-row>
                 <ion-col size="12">
                   <p style="text-align:left;">
-                    {{movel.description}}
+                    {{(movel) ? movel.description: ""}}
                   </p>
                 </ion-col>
-                <ion-col size="12">
+                <!-- <ion-col size="12">
                   <ion-chip outline *ngFor="let estado of movel.estado" color="primary">
                     <ion-label>{{estado}}</ion-label>
                   </ion-chip>
-                </ion-col>
+                </ion-col> -->
               </ion-row>
             </div>
-            <div class="local" *ngIf="movel.address">
+            <div class="local" *ngIf="movel && movel.address">
               <h2>Local</h2>
               <hr />
               <ion-row>

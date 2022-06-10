@@ -20,7 +20,7 @@ export class AuthService {
     return this.userSubject.value;
   }
   login(data?) {
-    return this.httpClient.post<any>(environment.apiUrl + '/login', { email: data.login, password: data.pass })
+    return this.httpClient.post<any>(environment.apiUrl + 'login', { email: data.login, password: data.pass })
       .pipe(map(user => {
         if (!user.success) {
           return user;
@@ -31,12 +31,12 @@ export class AuthService {
       }));
   }
   signup(data?) {
-    return this.httpClient.post<any>(environment.apiUrl + '/signup',
+    return this.httpClient.post<any>(environment.apiUrl + 'signup',
       { name: data.nome, email: data.email, password: data.password, phone: data.phone })
       .pipe(map(signedUp => signedUp));
   }
   logout() {
-    return this.httpClient.get<any>(environment.apiUrl + '/logout')
+    return this.httpClient.get<any>(environment.apiUrl + 'logout')
       .pipe(map(user => {
         localStorage.removeItem('token');
         this.userSubject.next(false);
@@ -44,7 +44,7 @@ export class AuthService {
       }));
   }
   check() {
-    return this.httpClient.get<any>(environment.apiUrl + '/check')
+    return this.httpClient.get<any>(environment.apiUrl + 'check')
       .pipe(map(checkedUser => checkedUser));
   }
 }
