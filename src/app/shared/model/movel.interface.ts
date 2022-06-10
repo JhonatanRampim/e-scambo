@@ -1,7 +1,11 @@
 export interface IMovel {
     id: number;
     title: string;
-    description: string;
+    color?: string;
+    width?: string;
+    height?: string;
+    length?: string;
+    description?: string;
     createdAt: string;
     createdBy: string;
     thumbnail: IThumbnail[];
