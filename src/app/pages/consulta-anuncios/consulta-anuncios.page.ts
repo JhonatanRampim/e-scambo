@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IonSearchbar } from '@ionic/angular';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-consulta-anuncios',
@@ -11,8 +12,9 @@ import { IMovel } from 'src/app/shared/model/movel.interface';
 })
 export class ConsultaAnunciosPage implements OnInit {
   @ViewChild(IonSearchbar) input: IonSearchbar;
-  moveis: IMovel[];
+  moveis: Array<IMovel> = [];
   showSearchBar = false;
+  apiLink = environment.imageUrl;
 
   constructor(
     public movelService: MovelService,
@@ -20,7 +22,11 @@ export class ConsultaAnunciosPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.moveis = this.movelService.getMoveisAnunciados();
+    this.movelService.getMoveisAnunciados().subscribe(moveis => {
+      moveis.forEach(movel => {
+        this.moveis.push(movel);
+      });
+    });
   }
   verDetalhes(selectedId: number) {
     this.router.navigate(['/detalhe-anuncio', selectedId]);
