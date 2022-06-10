@@ -19,7 +19,7 @@
       </ion-content>
       <ion-footer>
         <ion-list id="logout">
-          <ion-item button lines="none" routerDirection="root" routerLink="login">
+          <ion-item button lines="none" (click)="logout()">
             <ion-icon slot="start" name="exit-outline"></ion-icon>
             <ion-label>Sair</ion-label>
           </ion-item>

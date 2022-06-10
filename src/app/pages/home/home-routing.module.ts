@@ -12,16 +12,14 @@ const routes: Routes = [
       {
         path: 'consulta-anuncios',
         loadChildren: () => import('../consulta-anuncios/consulta-anuncios.module').then(m => m.ConsultaAnunciosPageModule),
-        // canActivate: [AuthGuardService]
       },
       {
         path: 'user-anuncio',
         loadChildren: () => import('../user-anuncio/user-anuncio.module').then(m => m.UserAnuncioPageModule),
-        // canActivate: [AuthGuardService]
       },
       {
         path: '',
-        redirectTo: '/consulta-anuncios',
+        redirectTo: 'consulta-anuncios',
         pathMatch: 'full'
       }
     ]
