@@ -1,11 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IMovel } from '../shared/model/movel.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovelService {
+  public moveis: Observable<IMovel[]>;
   private staticMoveis: IMovel[] = [
     {
       id: 1,
@@ -44,7 +48,7 @@ export class MovelService {
     }
   ];
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) { }
 
 
   getMoveisAnunciados(): IMovel[] {
@@ -53,5 +57,9 @@ export class MovelService {
 
   getMovelAnuncio(id: number): IMovel {
     return this.staticMoveis.find(movel => movel.id === id);
+  }
+  create(formData: FormData) {
+    return this.httpClient.post<any>(environment.apiUrl + '/movel/', formData)
+      .pipe(map(signedUp => signedUp));
   }
 }
