@@ -48,10 +48,10 @@ export class NewAnnouncePage implements OnInit {
       formData.append('width', this.f.width.value);
     }
     if (this.f.height.value) {
-      formData.append('height', this.f.width.value);
+      formData.append('height', this.f.height.value);
     }
     if (this.f.length.value) {
-      formData.append('length', this.f.width.value);
+      formData.append('length', this.f.length.value);
     }
 
     formData.append('description', this.f.descricao.value);
@@ -104,7 +104,7 @@ export class NewAnnouncePage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Eba! Cadastrado com Sucesso!!',
-      message: 'Bem vind@! Faça o login para começar.',
+      message: 'Agora é só aguardar alguém entrar em contato.',
       buttons: ['OK']
     });
     await alert.present();
