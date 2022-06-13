@@ -21,8 +21,12 @@ export class MovelService {
   }
 
   getMovelAnuncio(id) {
-    return this.httpClient.get<any>(environment.apiUrl + 'movel/'+id)
+    return this.httpClient.get<any>(environment.apiUrl + 'movel/' + id)
       .pipe(map(moveis => moveis.data[0]));
+  }
+  getUserAnuncio(usuarioId, movelId?) {
+    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}/${movelId??''}`)
+      .pipe(map(moveis => moveis.data));
   }
   create(formData: FormData) {
     return this.httpClient.post<any>(environment.apiUrl + 'movel/', formData)
