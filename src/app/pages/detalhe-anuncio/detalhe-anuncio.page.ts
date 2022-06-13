@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-detalhe-anuncio',
@@ -31,9 +32,11 @@ export class DetalheAnuncioPage implements OnInit {
     await this.presentLoading();
     this.movelService.getMovelAnuncio(listaId).subscribe(response => {
       this.movel = response;
-      this.movel.foto.forEach((picture) => {
-        this.images.push(new ImageItem({ src: picture.path, thumb: picture.path }),);
-      });
+      this.movel.estado = response.category.split(',');
+      this.images = this.movel.foto.map(picture =>
+        new ImageItem({ src: `${environment.imageUrl}${picture.path}`, thumb: `${environment.imageUrl}${picture.path}` })
+      );
+      console.log(this.movel);
       this.loadingController.dismiss('firstLoading');
     });
   }

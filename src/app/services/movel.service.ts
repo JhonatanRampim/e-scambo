@@ -21,7 +21,7 @@ export class MovelService {
   }
 
   getMovelAnuncio(id) {
-    return this.httpClient.get<any>(environment.apiUrl + 'movel/', { params: new HttpParams().set('id', id) })
+    return this.httpClient.get<any>(environment.apiUrl + 'movel/'+id)
       .pipe(map(moveis => moveis.data[0]));
   }
   create(formData: FormData) {
