@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
 import { environment } from 'src/environments/environment';
+import { NewAnnouncePage } from '../new-announce/new-announce.page';
 
 @Component({
   selector: 'app-user-anuncio',
@@ -17,6 +19,7 @@ export class UserAnuncioPage {
     public movelService: MovelService,
     public loadingController: LoadingController,
     public authService: AuthService,
+    private modalController: ModalController
   ) { }
 
   ionViewWillEnter() {
@@ -27,7 +30,6 @@ export class UserAnuncioPage {
     await this.presentLoading();
     this.moveis = [];
     this.movelService.getUserAnuncio(this.authService.userValue.id).subscribe(moveis => {
-      console.log(moveis);
       moveis.forEach(movel => {
         this.moveis.push(movel);
       });
@@ -42,7 +44,17 @@ export class UserAnuncioPage {
     });
     await loading.present();
   }
-
-
-
+  redirectToEdit(movel) {
+    this.modalVerVisitas(movel);
+  }
+  async modalVerVisitas(visitaInfo?) {
+    const modal = await this.modalController.create({
+      component: NewAnnouncePage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        movelData: visitaInfo,
+      }
+    });
+    return await modal.present();
+  }
 }

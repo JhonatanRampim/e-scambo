@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovelService } from 'src/app/services/movel.service';
+import { IMovel } from 'src/app/shared/model/movel.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-announce',
@@ -10,6 +12,8 @@ import { MovelService } from 'src/app/services/movel.service';
   styleUrls: ['./new-announce.page.scss'],
 })
 export class NewAnnouncePage implements OnInit {
+  @Input() movelData: any;
+  apiLink = environment.imageUrl;
   public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]'), } };
   listOfEstado = [];
   novoMovelForm = new FormGroup({
@@ -27,15 +31,34 @@ export class NewAnnouncePage implements OnInit {
   });
   isSubmitted = false;
   isLoading: boolean;
+  movel: IMovel;
   constructor(public formBuilder: FormBuilder,
     public movelServie: MovelService,
     public authService: AuthService,
+    private modalController: ModalController,
     public alertController: AlertController) { }
 
   get f() {
     return this.novoMovelForm.controls;
   }
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.movelData) {
+      this.fillFormData(this.movelData);
+    }
+  }
+
+  fillFormData(movel) {
+    console.log(movel);
+    this.f.nome.setValue(movel.name);
+    this.f.color.setValue(movel.color);
+    this.f.width.setValue(movel.width);
+    this.f.height.setValue(movel.height);
+    this.f.length.setValue(movel.length);
+    this.f.descricao.setValue(movel.description);
+    this.listOfEstado = movel.category.split(',');
+    this.f.estado.setValue(movel.category);
+    this.f.foto1.setValue(movel.foto[0]);
+  }
 
   onSubmit() {
     const formData = new FormData();
@@ -109,5 +132,7 @@ export class NewAnnouncePage implements OnInit {
     });
     await alert.present();
   }
-
+  closeModal() {
+    this.modalController.dismiss();
+  }
 }

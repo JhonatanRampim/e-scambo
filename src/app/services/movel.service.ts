@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IMovel } from '../shared/model/movel.interface';
@@ -10,7 +10,6 @@ import { IMovel } from '../shared/model/movel.interface';
 })
 export class MovelService {
   public moveis: Observable<IMovel[]>;
-
 
   constructor(public httpClient: HttpClient) { }
 
@@ -25,7 +24,7 @@ export class MovelService {
       .pipe(map(moveis => moveis.data[0]));
   }
   getUserAnuncio(usuarioId, movelId?) {
-    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}/${movelId??''}`)
+    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}/${movelId ?? ''}`)
       .pipe(map(moveis => moveis.data));
   }
   create(formData: FormData) {

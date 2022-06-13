@@ -1,7 +1,11 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!movelData">
       <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="movelData">
+      <ion-button (click)="closeModal()">Close <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Novo Móvel</ion-title>
   </ion-toolbar>
@@ -13,7 +17,8 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Cadastre seu móvel para doar. Utilize o formulário abaixo:</ion-card-title>
+          <ion-card-title *ngIf="movelData">Edição de anúncio {{movelData.id}} {{movelData.name}}</ion-card-title>
+          <ion-card-title *ngIf="!movelData">Cadastre seu móvel para doar. Utilize o formulário abaixo:</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
@@ -59,8 +64,8 @@
                 <ion-col size="12">
                   <mat-form-field appearance="standard">
                     <mat-label>Estado</mat-label>
-                    <input matInput formControlName="estado"  (focusout)="onFocusOut()" (keyup.Space)="saveChip(novoMovelForm.value.estado)"
-                      placeholder="Novo, Usado, Marcas-de-uso" />
+                    <input matInput formControlName="estado" (focusout)="onFocusOut()"
+                      (keyup.Space)="saveChip(novoMovelForm.value.estado)" placeholder="Novo, Usado, Marcas-de-uso" />
                     <mat-hint>Mais de uma palavra separe com hífen Ex.:(Marcas-de-uso)</mat-hint>
                   </mat-form-field>
                   <ion-chip *ngFor="let e of listOfEstado; let i = index;" outline color="secondary">
@@ -73,7 +78,8 @@
                 <ion-col size="12">
                   <mat-form-field appearance="standard">
                     <mat-label>Descrição</mat-label>
-                    <textarea matInput formControlName="descricao" placeholder="Descreva mais detalhes sobre seu anúncio."></textarea>
+                    <textarea matInput formControlName="descricao"
+                      placeholder="Descreva mais detalhes sobre seu anúncio."></textarea>
                   </mat-form-field>
                 </ion-col>
               </ion-row>
@@ -86,6 +92,9 @@
                     </ngx-mat-file-input>
                     <mat-icon matSuffix>image</mat-icon>
                   </mat-form-field>
+                  <div class="thumb" *ngIf="movelData">
+                    <img *ngIf="movelData.foto[0]" src="{{apiLink+movelData.foto[0].path}}">
+                  </div>
                 </ion-col>
                 <ion-col size="12" size-sm="3" size-md="3" size-lg="3">
                   <mat-form-field>
@@ -93,6 +102,9 @@
                     </ngx-mat-file-input>
                     <mat-icon matSuffix>image</mat-icon>
                   </mat-form-field>
+                  <div class="thumb" *ngIf="movelData">
+                    <img *ngIf="movelData.foto[1]" src="{{apiLink+movelData.foto[1].path}}">
+                  </div>
                 </ion-col>
                 <ion-col size="12" size-sm="3" size-md="3" size-lg="3">
                   <mat-form-field>
@@ -100,6 +112,9 @@
                     </ngx-mat-file-input>
                     <mat-icon matSuffix>image</mat-icon>
                   </mat-form-field>
+                  <div class="thumb" *ngIf="movelData">
+                      <img *ngIf="movelData.foto[2]" src="{{apiLink+movelData.foto[2].path}}">
+                  </div>
                 </ion-col>
                 <ion-col size="12" size-sm="3" size-md="3" size-lg="3">
                   <mat-form-field>
@@ -107,6 +122,9 @@
                     </ngx-mat-file-input>
                     <mat-icon matSuffix>image</mat-icon>
                   </mat-form-field>
+                  <div class="thumb" *ngIf="movelData">             
+                      <img *ngIf="movelData.foto[3]" src="{{apiLink+movelData.foto[3].path}}">
+                  </div>
                 </ion-col>
               </ion-row>
               <div class="buttons">
