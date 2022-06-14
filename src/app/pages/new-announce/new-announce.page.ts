@@ -16,7 +16,8 @@ export class NewAnnouncePage implements OnInit {
   @Input() movelData: any;
   apiLink = environment.imageUrl;
   public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]'), } };
-  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão', 'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona'];
+  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão',
+    'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona'];
   novoMovelForm = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     color: new FormControl('', []),
@@ -32,6 +33,7 @@ export class NewAnnouncePage implements OnInit {
   });
   isSubmitted = false;
   isLoading: boolean;
+  isReadOnly = false;
   movel: IMovel;
   constructor(public formBuilder: FormBuilder,
     public movelServie: MovelService,
@@ -45,12 +47,25 @@ export class NewAnnouncePage implements OnInit {
   }
   ngOnInit() {
     if (this.movelData) {
+      this.isReadOnly = true;
+      this.novoMovelForm = new FormGroup({
+        nome: new FormControl('', [Validators.required]),
+        color: new FormControl('', []),
+        width: new FormControl('', []),
+        height: new FormControl('', []),
+        length: new FormControl('', []),
+        descricao: new FormControl('', [Validators.required]),
+        estado: new FormControl('', [Validators.required]),
+        foto1: new FormControl('', []),
+        foto2: new FormControl('', []),
+        foto3: new FormControl('', []),
+        foto4: new FormControl('', []),
+      });
       this.fillFormData(this.movelData);
     }
   }
 
   fillFormData(movel) {
-    console.log(movel);
     this.f.nome.setValue(movel.name);
     this.f.color.setValue(movel.color);
     this.f.width.setValue(movel.width);
@@ -58,7 +73,53 @@ export class NewAnnouncePage implements OnInit {
     this.f.length.setValue(movel.length);
     this.f.descricao.setValue(movel.description);
     this.f.estado.setValue(movel.category);
-    this.f.foto1.setValue(movel.foto[0]);
+  }
+  submitEditData() {
+    const formData = new FormData();
+
+    formData.append('name', this.f.nome.value);
+    if (this.f.color.value) {
+      formData.append('color', this.f.color.value);
+    }
+    if (this.f.width.value) {
+      formData.append('width', this.f.width.value);
+    }
+    if (this.f.height.value) {
+      formData.append('height', this.f.height.value);
+    }
+    if (this.f.length.value) {
+      formData.append('length', this.f.length.value);
+    }
+
+    formData.append('description', this.f.descricao.value);
+    formData.append('usuario_id', this.authService.userValue.id);
+    formData.append('movel_id', this.movelData.id);
+    formData.append('category', this.f.estado.value);
+    if (this.f.foto1.value) {
+      formData.append('foto_1', this.f.foto1.value.files[0]);
+    }
+    if (this.f.foto2.value) {
+      formData.append('foto_2', this.f.foto2.value.files[0]);
+    }
+    if (this.f.foto4.value) {
+      formData.append('foto_3', this.f.foto2.value.files[0]);
+    };
+    if (this.f.foto4.value) {
+      formData.append('foto_4', this.f.foto2.value.files[0]);
+    };
+    this.movelServie.edit(formData).subscribe(async response => {
+      if (!response.success) {
+        this.isLoading = false;
+        this.presentErrorAlert(response.data);
+      }
+      await this.presentSuccessAlert();
+      this.isLoading = false;
+      this.modalController.dismiss();
+
+    }, (error) => {
+      this.isLoading = false;
+      this.presentErrorAlert(error.error.data);
+    });
   }
 
   onSubmit() {

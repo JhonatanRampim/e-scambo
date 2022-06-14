@@ -29,6 +29,10 @@ export class MovelService {
   }
   create(formData: FormData) {
     return this.httpClient.post<any>(environment.apiUrl + 'movel/', formData)
-      .pipe(map(signedUp => signedUp));
+      .pipe(map(moveis => moveis));
+  }
+  edit(formData: FormData) {
+    return this.httpClient.post<any>(environment.apiUrl + 'movel/edit', formData)
+      .pipe(map(moveis => moveis));
   }
 }
