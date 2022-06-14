@@ -15,7 +15,7 @@ export class MovelService {
 
 
   getMoveisAnunciados() {
-    return this.httpClient.get<any>(environment.apiUrl + 'movel/')
+    return this.httpClient.get<any>(environment.apiUrl + 'movel')
       .pipe(map(moveis => moveis.data));
   }
 
@@ -24,11 +24,11 @@ export class MovelService {
       .pipe(map(moveis => moveis.data[0]));
   }
   getUserAnuncio(usuarioId, movelId?) {
-    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}/${movelId ?? ''}`)
+    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}}`)
       .pipe(map(moveis => moveis.data));
   }
   create(formData: FormData) {
-    return this.httpClient.post<any>(environment.apiUrl + 'movel/', formData)
+    return this.httpClient.post<any>(environment.apiUrl + 'movel', formData)
       .pipe(map(moveis => moveis));
   }
   edit(formData: FormData) {
