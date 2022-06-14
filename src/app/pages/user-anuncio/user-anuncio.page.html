@@ -1,6 +1,9 @@
 <ion-content color="medium">
   <div style="display: flex;justify-content: center;text-align: center;">
-    <ion-card>
+    <!-- <div *ngIf="movel.length == 0" style="display: flex;justify-content: center;">
+      <p>Nenhum Anúncio encotrado!</p>
+    </div> -->
+    <ion-card >
       <ion-grid>
         <ion-row>
           <ion-col size="12" size-sm="12" size-md="12" size-lg="12">
@@ -16,7 +19,7 @@
               <div class="col">
                 <h4>{{movel.name}}</h4>
               </div>
-              <div class="col">
+              <div class="col" style="text-align: justify;">
                 <p>{{movel.description}}</p>
               </div>
             </ion-col>

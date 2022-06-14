@@ -34,6 +34,10 @@ export class UserAnuncioPage {
         this.moveis.push(movel);
       });
       this.loadingController.dismiss('firstLoading');
+    }, (error) => {
+      this.moveis = [];
+      this.loadingController.dismiss('firstLoading');
+      console.error(error);
     });
   }
   async presentLoading() {

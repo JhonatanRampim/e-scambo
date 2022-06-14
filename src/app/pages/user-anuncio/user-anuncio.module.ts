@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import {MatSelectModule} from '@angular/material/select'; 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -26,6 +27,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatInputModule,
     MatIconModule,
     MaterialFileInputModule,
+    MatSelectModule,
     NgxMaskModule.forRoot(),
   ],
   declarations: [UserAnuncioPage]
