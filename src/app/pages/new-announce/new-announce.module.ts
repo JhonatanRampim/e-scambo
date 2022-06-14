@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import {MatSelectModule} from '@angular/material/select'; 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -28,6 +29,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatIconModule,
     MaterialFileInputModule,
     NewAnnouncePageRoutingModule,
+    MatSelectModule,
     NgxMaskModule.forRoot(),
   ],
   declarations: [NewAnnouncePage],

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovelService } from 'src/app/services/movel.service';
@@ -15,7 +16,7 @@ export class NewAnnouncePage implements OnInit {
   @Input() movelData: any;
   apiLink = environment.imageUrl;
   public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]'), } };
-  listOfEstado = [];
+  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão', 'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona'];
   novoMovelForm = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     color: new FormControl('', []),
@@ -36,7 +37,8 @@ export class NewAnnouncePage implements OnInit {
     public movelServie: MovelService,
     public authService: AuthService,
     private modalController: ModalController,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private router: Router,) { }
 
   get f() {
     return this.novoMovelForm.controls;
@@ -55,7 +57,6 @@ export class NewAnnouncePage implements OnInit {
     this.f.height.setValue(movel.height);
     this.f.length.setValue(movel.length);
     this.f.descricao.setValue(movel.description);
-    this.listOfEstado = movel.category.split(',');
     this.f.estado.setValue(movel.category);
     this.f.foto1.setValue(movel.foto[0]);
   }
@@ -101,19 +102,7 @@ export class NewAnnouncePage implements OnInit {
       this.presentErrorAlert(error.error.data);
     });
   }
-  saveChip(data) {
-    if (data !== '') {
-      data = data.replace(' ', '');
-      this.listOfEstado.push(data);
-      this.f.estado.setValue('');
-    }
-  }
-  onFocusOut() {
-    this.f.estado.setValue(this.listOfEstado.join(','));
-  }
-  removeItem(i) {
-    this.listOfEstado.splice(i, 1);
-  }
+
   async presentErrorAlert(message?) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -128,7 +117,12 @@ export class NewAnnouncePage implements OnInit {
       cssClass: 'my-custom-class',
       header: 'Eba! Cadastrado com Sucesso!!',
       message: 'Agora é só aguardar alguém entrar em contato.',
-      buttons: ['OK']
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          this.router.navigate(['/home']);
+        }
+      }]
     });
     await alert.present();
   }
