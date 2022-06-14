@@ -1,6 +1,6 @@
 ion-col img {
-  object-fit: resize;
-  height: 256px ;
+  object-fit: cover;
+  height: 100%;
   width: 256px !important;
   border: 0;
   padding: 0;
@@ -14,6 +14,11 @@ ion-card {
 
 
 @media only screen and (max-width: 767px) {
+
+  ion-card {
+    width: 100%;
+  }
+
   .col-image {
     text-align: center;
   }

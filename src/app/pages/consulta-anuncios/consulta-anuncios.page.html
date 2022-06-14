@@ -1,5 +1,8 @@
 <ion-content color="medium">
   <ion-searchbar *ngIf="showSearchBar" showClearButton="true" animated placeholder="Buscar móveis"></ion-searchbar>
+  <div *ngIf="moveis.length == 0" style="display: flex;justify-content: center;">
+    <p>Nenhum Anúncio encotrado!</p>
+  </div>
   <ion-row *ngFor="let movel of moveis" style="display: flex;justify-content: center;">
     <ion-card>
       <ion-grid>
@@ -19,7 +22,7 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <ion-text>
+              <ion-text style="text-align: justify;">
                 {{movel.description}}
               </ion-text>
             </ion-row>
