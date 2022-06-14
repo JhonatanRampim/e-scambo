@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiUrl: 'http://10.7.1.26:8000/api/',
-  imageUrl: 'http://10.7.1.26:8000/',
+  apiUrl: 'https://arcane-hamlet-69670.herokuapp.com/api/',
+  imageUrl: 'https://arcane-hamlet-69670.herokuapp.com/',
   production: false
 };
 

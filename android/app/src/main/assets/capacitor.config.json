@@ -2,8 +2,5 @@
 	"appId": "io.ionic.starter",
 	"appName": "e-SCAMBO",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://10.7.1.26:8101"
-	}
+	"bundledWebRuntime": false
 }
