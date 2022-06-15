@@ -35,6 +35,7 @@ export class NewAnnouncePage implements OnInit {
   isLoading: boolean;
   isReadOnly = false;
   movel: IMovel;
+  selectedCategory;
   constructor(public formBuilder: FormBuilder,
     public movelServie: MovelService,
     public authService: AuthService,
@@ -73,6 +74,7 @@ export class NewAnnouncePage implements OnInit {
     this.f.length.setValue(movel.length);
     this.f.descricao.setValue(movel.description);
     this.f.estado.setValue(movel.category);
+    this.selectedCategory = movel.category;
   }
   submitEditData() {
     const formData = new FormData();
@@ -101,11 +103,11 @@ export class NewAnnouncePage implements OnInit {
     if (this.f.foto2.value) {
       formData.append('foto_2', this.f.foto2.value.files[0]);
     }
-    if (this.f.foto4.value) {
-      formData.append('foto_3', this.f.foto2.value.files[0]);
+    if (this.f.foto3.value) {
+      formData.append('foto_3', this.f.foto3.value.files[0]);
     };
     if (this.f.foto4.value) {
-      formData.append('foto_4', this.f.foto2.value.files[0]);
+      formData.append('foto_4', this.f.foto4.value.files[0]);
     };
     this.movelServie.edit(formData).subscribe(async response => {
       if (!response.success) {
@@ -181,6 +183,9 @@ export class NewAnnouncePage implements OnInit {
       buttons: [{
         text: 'Ok',
         handler: () => {
+          if (this.movelData) {
+            return this.closeModal()
+          }
           this.router.navigate(['/home']);
         }
       }]

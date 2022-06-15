@@ -65,7 +65,7 @@
                 <ion-col size="12">
                   <mat-form-field appearance="standard">
                     <mat-label>Categoria</mat-label>
-                    <mat-select formControlName="estado">
+                    <mat-select formControlName="estado" [(value)]="selectedCategory">
                       <mat-option>--</mat-option>
                       <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
                     </mat-select>
@@ -127,7 +127,8 @@
               </ion-row>
               <div class="buttons">
                 <ion-button type="submit" color="secondary" fill="outline">Salvar</ion-button>
-                <ion-button routerLink="/home" color="backbutton" fill="outline">Voltar</ion-button>
+                <ion-button *ngIf="!movelData" routerLink="/home" color="backbutton" fill="outline">Voltar</ion-button>
+                <ion-button *ngIf="movelData" (click)="closeModal()" color="backbutton" fill="outline">Voltar</ion-button>
               </div>
             </form>
           </ion-grid>
