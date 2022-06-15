@@ -21,7 +21,12 @@ export class AppComponent implements OnInit {
       this.menuController.swipeGesture(false);
     });
   }
-
+  ionViewDidEnter(): void {
+    if (!this.user) {
+      this.menuController.swipeGesture(false);
+    }
+    this.menuController.swipeGesture(true);
+  }
 
   logout() {
     this.authService.logout().subscribe(data => {
