@@ -35,4 +35,13 @@ export class MovelService {
     return this.httpClient.post<any>(environment.apiUrl + 'movel/edit', formData)
       .pipe(map(moveis => moveis));
   }
+  delete(movelId, usuarioId) {
+    return this.httpClient.delete(environment.apiUrl + 'movel/delete', {
+      body: {
+        movel_id: movelId,
+        usuario_id: usuarioId
+      }
+    })
+      .pipe(map(moveis => moveis));
+  }
 }

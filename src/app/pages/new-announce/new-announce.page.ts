@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
@@ -41,7 +41,8 @@ export class NewAnnouncePage implements OnInit {
     public authService: AuthService,
     private modalController: ModalController,
     public alertController: AlertController,
-    private router: Router,) { }
+    private router: Router,
+    private loadingController: LoadingController) { }
 
   get f() {
     return this.novoMovelForm.controls;
@@ -76,7 +77,8 @@ export class NewAnnouncePage implements OnInit {
     this.f.estado.setValue(movel.category);
     this.selectedCategory = movel.category;
   }
-  submitEditData() {
+  async submitEditData() {
+    await this.presentLoading();
     const formData = new FormData();
 
     formData.append('name', this.f.nome.value);
@@ -112,19 +114,23 @@ export class NewAnnouncePage implements OnInit {
     this.movelServie.edit(formData).subscribe(async response => {
       if (!response.success) {
         this.isLoading = false;
-        this.presentErrorAlert(response.data);
+        await this.loadingController.dismiss('firstLoading');
+        await this.presentErrorAlert(response.data);
       }
+      await this.loadingController.dismiss('firstLoading');
       await this.presentSuccessAlert();
       this.isLoading = false;
-      this.modalController.dismiss();
+      await this.modalController.dismiss();
 
-    }, (error) => {
+    }, async (error) => {
+      await this.loadingController.dismiss('firstLoading');
       this.isLoading = false;
-      this.presentErrorAlert(error.error.data);
+      await this.presentErrorAlert(error.error.data);
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
+    await this.presentLoading();
     const formData = new FormData();
 
     formData.append('name', this.f.nome.value);
@@ -155,14 +161,17 @@ export class NewAnnouncePage implements OnInit {
     this.movelServie.create(formData).subscribe(async response => {
       if (!response.success) {
         this.isLoading = false;
-        this.presentErrorAlert(response.data);
+        await this.loadingController.dismiss('firstLoading');
+        await this.presentErrorAlert(response.data);
       }
+      await this.loadingController.dismiss('firstLoading');
       await this.presentSuccessAlert();
       this.isLoading = false;
 
-    }, (error) => {
+    }, async (error) => {
       this.isLoading = false;
-      this.presentErrorAlert(error.error.data);
+      await this.loadingController.dismiss('firstLoading');
+      await this.presentErrorAlert(error.error.data);
     });
   }
 
@@ -184,7 +193,7 @@ export class NewAnnouncePage implements OnInit {
         text: 'Ok',
         handler: () => {
           if (this.movelData) {
-            return this.closeModal()
+            return this.closeModal();
           }
           this.router.navigate(['/home']);
         }
@@ -194,5 +203,13 @@ export class NewAnnouncePage implements OnInit {
   }
   closeModal() {
     this.modalController.dismiss();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      id: 'firstLoading',
+      cssClass: 'my-custom-class',
+      message: 'Carregando...',
+    });
+    await loading.present();
   }
 }

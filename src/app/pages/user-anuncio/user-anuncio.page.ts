@@ -62,7 +62,7 @@ export class UserAnuncioPage {
     });
     return await modal.present();
   }
-  async presentDeleteConfirmationAlert() {
+  async presentDeleteConfirmationAlert(id) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Atenção!',
@@ -75,13 +75,40 @@ export class UserAnuncioPage {
       }, {
         text: 'Sim',
         handler: () => {
-          return this.delete()
+          this.delete(id);
         }
       }]
     });
     await alert.present();
   }
-  delete() {
-    console.log('confirmed');
+  async delete(id) {
+    await this.presentLoading();
+    this.movelService.delete(id, this.authService.userValue.id).subscribe(async (data) => {
+      this.moveis = this.moveis.filter(item => item.id !== id);
+      await this.loadingController.dismiss('firstLoading');
+      await this.presentSuccessAlert();
+    }, error => {
+      this.loadingController.dismiss('firstLoading');
+      this.presentErrorAlert(error.error.data);
+    });
+  }
+
+  async presentErrorAlert(message?) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Ops! Houve um erro :(',
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+  async presentSuccessAlert(message?) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Eba! Cadastrado com Sucesso!!',
+      message: 'Bem vind@! Faça o login para começar.',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
