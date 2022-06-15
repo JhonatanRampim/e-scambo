@@ -16,8 +16,8 @@ export class NewAnnouncePage implements OnInit {
   @Input() movelData: any;
   apiLink = environment.imageUrl;
   public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]'), } };
-  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão',
-    'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona'];
+  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão', 'Cama',
+    'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona', 'Guarda-Roupa', 'Armário'];
   novoMovelForm = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     color: new FormControl('', []),
@@ -152,11 +152,11 @@ export class NewAnnouncePage implements OnInit {
     formData.append('category', this.f.estado.value);
     formData.append('foto_1', this.f.foto1.value.files[0]);
     formData.append('foto_2', this.f.foto2.value.files[0]);
-    if (this.f.foto4.value) {
-      formData.append('foto_3', this.f.foto2.value.files[0]);
+    if (this.f.foto3.value) {
+      formData.append('foto_3', this.f.foto3.value.files[0]);
     };
     if (this.f.foto4.value) {
-      formData.append('foto_4', this.f.foto2.value.files[0]);
+      formData.append('foto_4', this.f.foto4.value.files[0]);
     };
     this.movelServie.create(formData).subscribe(async response => {
       if (!response.success) {
@@ -187,13 +187,14 @@ export class NewAnnouncePage implements OnInit {
   async presentSuccessAlert(message?) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Eba! Cadastrado com Sucesso!!',
+      header: 'Cadastrado com Sucesso!',
       message: 'Agora é só aguardar alguém entrar em contato.',
       buttons: [{
         text: 'Ok',
         handler: () => {
           if (this.movelData) {
-            return this.closeModal();
+            this.closeModal();
+            return this.router.navigate(['/home']);
           }
           this.router.navigate(['/home']);
         }
