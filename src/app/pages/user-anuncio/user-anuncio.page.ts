@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MovelService } from 'src/app/services/movel.service';
 import { IMovel } from 'src/app/shared/model/movel.interface';
@@ -19,7 +19,8 @@ export class UserAnuncioPage {
     public movelService: MovelService,
     public loadingController: LoadingController,
     public authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private alertController: AlertController
   ) { }
 
   ionViewWillEnter() {
@@ -60,5 +61,27 @@ export class UserAnuncioPage {
       }
     });
     return await modal.present();
+  }
+  async presentDeleteConfirmationAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Atenção!',
+      message: 'Realemente deseja excluir o anúncio?',
+      buttons: [{
+        text: 'Não',
+        handler: () => {
+          alert.dismiss();
+        }
+      }, {
+        text: 'Sim',
+        handler: () => {
+          return this.delete()
+        }
+      }]
+    });
+    await alert.present();
+  }
+  delete() {
+    console.log('confirmed');
   }
 }
