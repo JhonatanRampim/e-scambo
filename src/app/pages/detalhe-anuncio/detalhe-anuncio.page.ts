@@ -36,7 +36,6 @@ export class DetalheAnuncioPage implements OnInit {
       this.images = this.movel.foto.map(picture =>
         new ImageItem({ src: `${environment.imageUrl}${picture.path}`, thumb: `${environment.imageUrl}${picture.path}` })
       );
-      console.log(this.movel);
       this.loadingController.dismiss('firstLoading');
     });
   }
