@@ -23,7 +23,7 @@
             </ion-row>
             <ion-row>
               <ion-text style="text-align: justify;">
-                {{movel.description}}
+                {{movel.description | truncate: 144 : true }}
               </ion-text>
             </ion-row>
             <ion-row>

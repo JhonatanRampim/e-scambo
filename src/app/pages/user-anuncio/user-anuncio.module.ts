@@ -12,7 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import {MatSelectModule} from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select';
+import { TruncatePipeModule } from 'src/app/shared/shared.module';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -28,8 +29,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatIconModule,
     MaterialFileInputModule,
     MatSelectModule,
+    TruncatePipeModule,
     NgxMaskModule.forRoot(),
   ],
   declarations: [UserAnuncioPage]
 })
-export class UserAnuncioPageModule {}
+export class UserAnuncioPageModule { }

@@ -12,7 +12,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { TruncatePipe } from './helpers/truncatepipe';
 
 @NgModule({
-  declarations: [AppComponent, TruncatePipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, HttpClientModule],
   providers: [
