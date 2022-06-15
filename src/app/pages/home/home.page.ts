@@ -7,15 +7,14 @@ import { IMovel } from '../../shared/model/movel.interface';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   moveis: IMovel[];
 
   constructor(
     public menuControler: MenuController
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter(): void {
     this.menuControler.enable(true);
   }
-
 }

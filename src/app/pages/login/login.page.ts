@@ -25,11 +25,14 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.menuControler.enable(false);
     this.loginForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.minLength(2), Validators.email]],
       pass: ['', [Validators.required, Validators.minLength(2)]],
     });
+  }
+
+  ionViewDidEnter(): void {
+    this.menuControler.enable(false);
   }
 
   hideShowPassword() {
@@ -56,23 +59,21 @@ export class LoginPage implements OnInit {
       return;
     }
     this.authService
-    .login(this.loginForm.value)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        if(!data.success) {
+      .login(this.loginForm.value)
+      .subscribe(
+        (data) => {
+          if (!data.success) {
+            this.isLoading = false;
+            return this.presentAlert(data.data);
+          }
           this.isLoading = false;
-          return this.presentAlert(data.data);
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          this.isLoading = false;
+          this.presentAlert(error.error?.data);
         }
-        this.isLoading = false;
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        console.log(error);
-        this.isLoading = false;
-        this.presentAlert(error.error?.data);
-      }
-    );
+      );
 
   }
 
