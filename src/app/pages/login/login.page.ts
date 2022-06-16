@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, LoadingController, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,11 +17,12 @@ export class LoginPage implements OnInit {
   isLoading: boolean;
   route: Router;
 
-  constructor(public formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private router: Router,
-    public menuControler: MenuController,
-    public alertController: AlertController,
-    public authService: AuthService
+    private menuControler: MenuController,
+    private alertController: AlertController,
+    private loadingController: LoadingController,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewDidEnter(): void {
+    this.loadingController.dismiss();
     this.menuControler.enable(false);
   }
 
@@ -53,28 +55,38 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
-  submitForm() {
+  async submitForm() {
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       return;
     }
+    this.presentLoading();
     this.authService
       .login(this.loginForm.value)
       .subscribe(
-        (data) => {
+        async (data) => {
           if (!data.success) {
             this.isLoading = false;
             return this.presentAlert(data.data);
           }
+          await this.loadingController.dismiss('firstLoading');
           this.isLoading = false;
           this.router.navigate(['/home']);
         },
-        (error) => {
+        async (error) => {
+          await this.loadingController.dismiss('firstLoading');
           this.isLoading = false;
-          this.presentAlert(error.error?.data);
+          await this.presentAlert(error.error?.data);
         }
       );
-
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      id: 'firstLoading',
+      cssClass: 'my-custom-class',
+      message: 'Carregando...',
+    });
+    await loading.present();
   }
 
 }

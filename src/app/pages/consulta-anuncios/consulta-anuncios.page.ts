@@ -35,6 +35,9 @@ export class ConsultaAnunciosPage implements OnInit {
         this.moveis.push(movel);
       });
       this.loadingController.dismiss('firstLoading');
+    }, (error) => {
+      this.loadingController.dismiss('firstLoading');
+      console.error(error)
     });
   }
   verDetalhes(selectedId: number) {
