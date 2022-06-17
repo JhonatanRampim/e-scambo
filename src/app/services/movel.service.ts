@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { options } from '../pages/user-anuncio/user-anuncio.module';
 import { IMovel } from '../shared/model/movel.interface';
 
 @Injectable({
@@ -14,13 +15,23 @@ export class MovelService {
   constructor(public httpClient: HttpClient) { }
 
 
-  getMoveisAnunciados() {
-    return this.httpClient.get<any>(environment.apiUrl + 'movel')
+  getMoveisAnunciados(nome?: string, categoria?: string) {
+    let params = new HttpParams();
+    if (nome) {
+      params = params.set('nome', nome)
+    }
+    if(categoria) {
+      params = params.set('categoria', categoria);
+    }
+    return this.httpClient.get<any>(environment.apiUrl + 'movel', { params: params })
       .pipe(map(moveis => moveis.data));
   }
 
   getMovelAnuncio(id) {
-    return this.httpClient.get<any>(environment.apiUrl + 'movel/' + id)
+    let params = new HttpParams();
+
+    params = params.set('id', id);
+    return this.httpClient.get<any>(environment.apiUrl + 'movel', { params })
       .pipe(map(moveis => moveis.data[0]));
   }
   getUserAnuncio(usuarioId, movelId?) {
