@@ -105,8 +105,8 @@ export class UserAnuncioPage {
   async presentSuccessAlert(message?) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Eba! Cadastrado com Sucesso!!',
-      message: 'Bem vind@! Faça o login para começar.',
+      header: 'Sucesso!',
+      message: 'Anúncio excluido com sucesso.',
       buttons: ['OK']
     });
     await alert.present();

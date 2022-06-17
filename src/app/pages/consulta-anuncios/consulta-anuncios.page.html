@@ -35,8 +35,7 @@
     </ion-card>
   </ion-row>
   <!-- Sheet Modal -->
-  <ion-modal [isOpen]="true" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" [canDismiss]="true"
-    trigger="trigger-button">
+  <ion-modal [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5" [canDismiss]="true" trigger="trigger-button">
     <ng-template>
       <ion-card-header style="text-align: center;">Filtros de busca</ion-card-header>
       <ion-content style="text-align: center;">
@@ -61,8 +60,7 @@
                   </mat-select>
                 </mat-form-field>
                 <ion-button type="submit" color="secondary" fill="outline">Filtrar</ion-button>
-                <ion-button (click)="getMyListsItems()" color="backbutton" fill="outline">Voltar</ion-button>
-
+                <ion-button (click)="getMyListsItems()" color="backbutton" fill="outline">Limpar filtros</ion-button>
               </ion-col>
             </ion-row>
           </form>
