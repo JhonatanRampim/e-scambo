@@ -8,6 +8,11 @@ ion-col img {
   margin: auto;
 }
 
+mat-form-field {
+  font-family: 'Montserrat';
+  width: 100%;
+}
+
 ion-card {
   width: 70%;
 }
@@ -21,5 +26,33 @@ ion-card {
 
   .col-image {
     text-align: center;
+  }
+}
+
+::ng-deep .mat-form-field {
+  .mat-form-field-underline {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-ripple {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-required-marker {
+    color: var(--ion-color-secondary);
+  }
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-ripple {
+    background-color: var(--ion-color-secondary);
+  }
+
+  .mat-form-field-required-marker {
+    color: var(--ion-color-secondary);
   }
 }

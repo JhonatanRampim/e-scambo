@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonSearchbar, LoadingController } from '@ionic/angular';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { MovelService } from 'src/app/services/movel.service';
+import { ICategory } from 'src/app/shared/model/category.interface copy';
 import { IMovel } from 'src/app/shared/model/movel.interface';
 import { environment } from 'src/environments/environment';
 
@@ -15,16 +18,23 @@ export class ConsultaAnunciosPage implements OnInit {
   moveis: Array<IMovel> = [];
   showSearchBar = false;
   apiLink = environment.imageUrl;
+  filtroForm = new FormGroup({
+    nome: new FormControl(''),
+    categoria: new FormControl(''),
+  });
+  categoryList: ICategory[];
 
   constructor(
     public movelService: MovelService,
     public router: Router,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private categoriaService: CategoriaService
   ) { }
 
   ngOnInit() { }
   ionViewWillEnter() {
     this.getMyListsItems();
+    this.categoryList = this.categoriaService.getCategories()
   }
 
   async getMyListsItems() {
@@ -57,6 +67,23 @@ export class ConsultaAnunciosPage implements OnInit {
       message: 'Carregando...',
     });
     await loading.present();
+  }
+
+  async onSubmit() {
+
+    await this.presentLoading();
+    const categoriaFilter = (this.filtroForm.value.categoria) ? this.filtroForm.value.categoria.title : '';
+    const nome = (this.filtroForm.value.nome) ? this.filtroForm.value.nome : '';
+    this.movelService.getMoveisAnunciados(nome, categoriaFilter).subscribe(async (data) => {
+      this.moveis = [];
+      data.forEach(movel => {
+        this.moveis.push(movel);
+      });
+      await this.loadingController.dismiss('firstLoading');
+    }, async error => {
+      await this.loadingController.dismiss('firstLoading');
+      console.error(error);
+    })
   }
 
 }
