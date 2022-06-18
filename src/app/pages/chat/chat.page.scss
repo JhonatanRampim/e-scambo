@@ -1,9 +1,14 @@
 mat-form-field {
-    font-family: 'Montserrat';
-    width: 100%;
-  }
+  font-family: 'Montserrat';
+  width: 100%;
+}
+
 .sender {
-  color:red;
-  display: flex;
+  color: red;
   align-items: end;
+}
+
+.message-area {
+  overflow-y: scroll;
+  height: 300px;
 }

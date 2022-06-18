@@ -20,7 +20,7 @@ export class ChatService {
     if (receiver) {
       params = params.set('receiver', receiver);
     }
-    return this.httpClient.get<any>(environment.apiUrl + 'messages',).pipe(map(messages => messages));
+    return this.httpClient.get<any>(environment.apiUrl + 'messages', {params}).pipe(map(messages => messages));
   }
 
   sendMessage(receiver: string, message: string, user?: string) {

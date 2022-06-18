@@ -18,6 +18,7 @@ export class ChatPage implements OnInit {
   user: IUser;
   messages: Array<IMessage>;
   isUserSender = false;
+  receiverId:string;
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
   });
@@ -36,10 +37,11 @@ export class ChatPage implements OnInit {
       }
     });
     this.activatedRoute.queryParams.subscribe(routeParams => {
-      this.usuarioId = routeParams.usuarioId;
-      this.movelId = routeParams.movelId;
-      this.chatService.getMessages(this.user.id.toString(), this.usuarioId).subscribe(message => {
+      this.receiverId = routeParams.receiverId;
+      this.chatService.getMessages(this.user.id.toString(), this.receiverId).subscribe(message => {
         this.messages = message;
+        console.log(this.messages);
+        this.receiverId = message[0].receiver_id;
         if(message[0].usuario_id === this.user.id) {
           this.isUserSender = true;
         }
@@ -50,8 +52,7 @@ export class ChatPage implements OnInit {
 
   //TO:DO - Verifica necessidade de enviar
   onSubmit() {
-    const receiver = this.usuarioId;
-    const sender = this.user.id
+    const receiver = '1';
     const message = this.chatForm.value.message;
     this.chatService.sendMessage(receiver, message).subscribe(response => {
       console.log(response);

@@ -11,7 +11,7 @@
               <ion-row *ngFor="let message of meusChats">
                 <ion-col size="12">
                   <div *ngIf="message.receiver_id">
-                    <ion-item>
+                    <ion-item button (click)="selectChat(message.receiver_id)">
                       <ion-avatar slot="start">
                         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
                       </ion-avatar>

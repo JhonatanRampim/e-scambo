@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -18,6 +18,7 @@ export class MeusChatsPage implements OnInit {
     private loadingController: LoadingController,
     private chatService: ChatService,
     private authService: AuthService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -31,5 +32,8 @@ export class MeusChatsPage implements OnInit {
     this.chatService.getUserChats().subscribe(chats => {
       this.meusChats = chats;
     })
+  }
+  selectChat(receiverId) {
+    return this.router.navigate(['/chat'], { queryParams: {receiverId: receiverId} });
   }
 }
