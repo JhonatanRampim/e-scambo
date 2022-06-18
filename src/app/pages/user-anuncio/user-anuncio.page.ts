@@ -66,7 +66,7 @@ export class UserAnuncioPage {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Atenção!',
-      message: 'Realemente deseja excluir o anúncio?',
+      message: 'Realmente deseja excluir o anúncio?',
       buttons: [{
         text: 'Não',
         handler: () => {

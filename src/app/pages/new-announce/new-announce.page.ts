@@ -16,7 +16,7 @@ export class NewAnnouncePage implements OnInit {
   @Input() movelData: any;
   apiLink = environment.imageUrl;
   public customPatterns = { 0: { pattern: new RegExp('\[a-zA-Z\]'), } };
-  categoryList: string[] = ['Sofá', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão', 'Cama',
+  categoryList: string[] = ['Sofá', 'Cadeira', 'Banqueta', 'Cômoda', 'Mesa de Jantar', 'Mesa de Escritório ', 'Colchão', 'Cama',
     'Guarda-roupa', 'TV', 'Geladeira', 'Fogão', 'Micro-ondas', 'Poltrona', 'Guarda-Roupa', 'Armário'];
   novoMovelForm = new FormGroup({
     nome: new FormControl('', [Validators.required]),
