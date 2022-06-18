@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -9,6 +9,8 @@ import { DetalheAnuncioPageRoutingModule } from './detalhe-anuncio-routing.modul
 import { DetalheAnuncioPage } from './detalhe-anuncio.page';
 
 import { GalleryModule, GALLERY_CONFIG } from 'ng-gallery';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -16,6 +18,9 @@ import { GalleryModule, GALLERY_CONFIG } from 'ng-gallery';
     FormsModule,
     IonicModule,
     GalleryModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
     DetalheAnuncioPageRoutingModule
   ],
   providers: [
