@@ -45,11 +45,25 @@ export class ChatPage implements OnInit {
     });
   }
 
-  onSubmit() {
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      id: 'firstLoading',
+      cssClass: 'my-custom-class',
+      message: 'Carregando...',
+    });
+    await loading.present();
+  }
+
+  async onSubmit() {
+    await this.presentLoading();
     const receiver = this.receiverId;
     const message = this.chatForm.value.message;
-    this.chatService.sendMessage(receiver, message).subscribe(response => {
-      console.log(response);
+    this.chatService.sendMessage(receiver, message).subscribe(async response => {
+      this.chatForm.controls.message.setValue('');
+      await this.loadingController.dismiss('firstLoading');
+      window.location.reload();
+    }, async error => {
+      await this.loadingController.dismiss('firstLoading');
     });
   }
 
