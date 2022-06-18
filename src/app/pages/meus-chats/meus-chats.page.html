@@ -10,13 +10,24 @@
             <div class="message-area">
               <ion-row *ngFor="let message of meusChats">
                 <ion-col size="12">
-                  <div *ngIf="message.receiver_id">
+                  <div *ngIf="message.receiver_id !== this.user.id">
                     <ion-item button (click)="selectChat(message.receiver_id)">
                       <ion-avatar slot="start">
                         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
                       </ion-avatar>
                       <ion-label>
                         <h2>{{message.receiver.name}} </h2>
+                        <p>Última Mesagem: {{message.message}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                  <div *ngIf="message.receiver_id === this.user.id">
+                    <ion-item button (click)="selectChat(message.usuario_id)">
+                      <ion-avatar slot="start">
+                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h2>{{message.user.name}} </h2>
                         <p>Última Mesagem: {{message.message}}</p>
                       </ion-label>
                     </ion-item>
