@@ -27,4 +27,9 @@ export class ChatService {
     return this.httpClient.post<any>(environment.apiUrl + 'messages', { receiverId: receiver, message })
       .pipe(map(messages => messages));
   }
+
+  getUserChats() {
+    return this.httpClient.get<any>(environment.apiUrl + 'user-chat')
+      .pipe(map(messages => messages));
+  }
 }

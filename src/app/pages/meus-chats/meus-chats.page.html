@@ -1,0 +1,32 @@
+<ion-content color="medium">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Minhas Conversas </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <div class="message-area">
+              <ion-row *ngFor="let message of meusChats">
+                <ion-col size="12">
+                  <div *ngIf="message.receiver_id">
+                    <ion-item>
+                      <ion-avatar slot="start">
+                        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                      </ion-avatar>
+                      <ion-label>
+                        <h2>{{message.receiver.name}} </h2>
+                        <p>Última Mesagem: {{message.message}}</p>
+                      </ion-label>
+                    </ion-item>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

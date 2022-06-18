@@ -18,6 +18,10 @@ const routes: Routes = [
         loadChildren: () => import('../user-anuncio/user-anuncio.module').then(m => m.UserAnuncioPageModule),
       },
       {
+        path: 'meus-chats',
+        loadChildren: () => import('../meus-chats/meus-chats.module').then( m => m.MeusChatsPageModule)
+      },
+      {
         path: '',
         redirectTo: 'consulta-anuncios',
         pathMatch: 'full'
