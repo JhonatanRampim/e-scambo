@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-align-items-center">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Conversando com:
+            {{(messages)? (messages[0].usuario_id === this.user.id) ? messages[0].receiver.name:  messages[0].user.name : ''}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row *ngFor="let message of messages">
+              <ion-col size="12">
+                <div *ngIf="message.usuario_id !== this.user.id" [ngClass]="{'sender':isUserSender}">
+                  <ion-item>
+                    <ion-avatar slot="start">
+                      <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
+                    </ion-avatar>
+                    <ion-label>
+                      <h2>{{message.receiver.name}}</h2>
+                      <p>{{message.message}}</p>
+                    </ion-label>
+                  </ion-item>
+                </div>
+              </ion-col>
+              <ion-col size="12" class="ion-text-end">
+                <div *ngIf="message.usuario_id === this.user.id">
+                  <ion-item>
+                    <ion-avatar slot="start">
+                      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+                    </ion-avatar>
+                    <ion-label>
+                      <h2>{{message.user.name}}</h2>
+                      <p>{{message.message}}</p>
+                    </ion-label>
+                  </ion-item>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+                  <mat-form-field appearance="standard">
+                    <mat-label>Digite seu texto aqui</mat-label>
+                    <input matInput formControlName="message" placeholder="Sofá Marrom" />
+                  </mat-form-field>
+                  <div class="buttons">
+                    <ion-button type="submit" color="secondary" fill="outline">Salvar</ion-button>
+                    <ion-button routerLink="/home" color="backbutton" fill="outline">Voltar
+                    </ion-button>
+                  </div>
+                </form>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

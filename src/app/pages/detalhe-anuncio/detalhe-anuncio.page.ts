@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { GalleryItem, ImageItem } from 'ng-gallery';
 import { MovelService } from 'src/app/services/movel.service';
@@ -17,6 +17,7 @@ export class DetalheAnuncioPage implements OnInit {
   constructor(
     public movelService: MovelService,
     public activatedRoute: ActivatedRoute,
+    public router: Router,
     private loadingController: LoadingController,
   ) { }
 
@@ -29,14 +30,14 @@ export class DetalheAnuncioPage implements OnInit {
   }
   ngOnInit() { }
   async getMyListsItems(listaId) {
-    await this.presentLoading();
-    this.movelService.getMovelAnuncio(listaId).subscribe(response => {
+    // await this.presentLoading();
+    this.movelService.getMovelAnuncio(listaId).subscribe(async response => {
       this.movel = response;
       this.movel.estado = response.category.split(',');
       this.images = this.movel.foto.map(picture =>
         new ImageItem({ src: `${environment.imageUrl}${picture.path}`, thumb: `${environment.imageUrl}${picture.path}` })
       );
-      this.loadingController.dismiss('firstLoading');
+      // await this.loadingController.dismiss('firstLoading');
     });
   }
 
@@ -47,5 +48,8 @@ export class DetalheAnuncioPage implements OnInit {
       message: 'Carregando...',
     });
     await loading.present();
+  }
+  loadChat(usuarioId, movelId) {
+    return this.router.navigate(['/chat'], { queryParams: { usuarioId: usuarioId, movelId: movelId } });
   }
 }

@@ -6,3 +6,6 @@ export interface IUser {
     createdAt?: string;
     updatedAt?: string;
 }
+export interface IUserMessage extends IUser {
+    message?:string;
+}

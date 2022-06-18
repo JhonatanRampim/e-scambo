@@ -64,7 +64,7 @@
     </ion-col>
   </ion-row>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary">
+    <ion-fab-button (click)="loadChat(movel.usuario_id,movel.id)" color="secondary">
       <ion-icon name="chatbubble-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Message } from '../shared/model/message.interface';
+import { IMessage } from '../shared/model/message.interface';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ChatService {
-  messages: Array<Message>;
+  messages: Array<IMessage>;
 
   constructor(public httpClient: HttpClient) { }
 
@@ -20,6 +20,11 @@ export class ChatService {
     if (receiver) {
       params = params.set('receiver', receiver);
     }
-    return this.httpClient.get(environment.apiUrl + 'movel',).pipe(map(messages => messages));
+    return this.httpClient.get<any>(environment.apiUrl + 'messages',).pipe(map(messages => messages));
+  }
+
+  sendMessage(receiver: string, message: string, user?: string) {
+    return this.httpClient.post<any>(environment.apiUrl + 'messages', { receiverId: receiver, message })
+      .pipe(map(messages => messages));
   }
 }
