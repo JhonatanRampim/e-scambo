@@ -38,7 +38,7 @@ export class UserAnuncioPage {
     }, (error) => {
       this.moveis = [];
       this.loadingController.dismiss('firstLoading');
-      console.error(error);
+      // console.error(error);
     });
   }
   async presentLoading() {

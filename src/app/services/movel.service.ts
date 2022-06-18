@@ -35,7 +35,10 @@ export class MovelService {
       .pipe(map(moveis => moveis.data[0]));
   }
   getUserAnuncio(usuarioId, movelId?) {
-    return this.httpClient.get<any>(`${environment.apiUrl}movel/user/${usuarioId}}`)
+    let params = new HttpParams();
+
+    params = params.set('usuarioId', usuarioId);
+    return this.httpClient.get<any>(`${environment.apiUrl}movel/user`, {params})
       .pipe(map(moveis => moveis.data));
   }
   create(formData: FormData) {
