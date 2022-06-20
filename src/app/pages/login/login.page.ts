@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.presentLoading();
+    await this.presentLoading();
     this.authService
       .login(this.loginForm.value)
       .subscribe(
