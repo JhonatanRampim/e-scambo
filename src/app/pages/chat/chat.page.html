@@ -18,7 +18,7 @@
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
-            <div class="message-area">
+            <div #divToScroll class="message-area">
               <ion-row *ngFor="let message of messages">
                 <ion-col size="12" class="ion-align-items-end">
                   <div *ngIf="message.usuario_id === this.user.id">

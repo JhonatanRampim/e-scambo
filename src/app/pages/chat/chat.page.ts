@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -14,6 +14,7 @@ import { IUser, IUserMessage } from 'src/app/shared/model/user.interface';
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
+  @ViewChild('divToScroll') divToScroll: ElementRef;
   usuarioId: string;
   movelId: string;
   user: IUser;
@@ -37,6 +38,7 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
   }
+
   ionViewWillEnter() {
     this.authService.user.subscribe(user => {
       if (user) {
@@ -50,13 +52,14 @@ export class ChatPage implements OnInit {
       })
       return routeParams;
     });
-    this._channel = this._pusherService.getPusher().subscribe('chat.1');
+    this._channel = this._pusherService.getPusher().subscribe(`chat.${this.user.id}`);
     this.getChannel().bind("App\\Events\\PrivateMessage", data => {
       console.log(data);
-      if(data){
+      if (data) {
         this.messages.push(data.message);
+        this.divToScroll.nativeElement.scrollTop = 999999;
       }
-    
+
     });
   }
   getChannel() {
@@ -73,15 +76,14 @@ export class ChatPage implements OnInit {
   }
 
   async onSubmit() {
-    await this.presentLoading();
     const receiver = this.receiverId;
     const message = this.chatForm.value.message;
     this.chatService.sendMessage(receiver, message).subscribe(async response => {
       this.chatForm.controls.message.setValue('');
-      await this.loadingController.dismiss('firstLoading');
-      // window.location.reload();
+      this.messages.push(response.data);
+      this.divToScroll.nativeElement.scrollTop = 999999;
     }, async error => {
-      await this.loadingController.dismiss('firstLoading');
+      // await this.loadingController.dismiss('firstLoading');
     });
   }
 
