@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { PusherService } from 'src/app/services/pusher.service';
 import { IMessage } from 'src/app/shared/model/message.interface';
 import { IUser, IUserMessage } from 'src/app/shared/model/user.interface';
 
@@ -19,6 +20,8 @@ export class ChatPage implements OnInit {
   messages: Array<IMessage>;
   isUserSender = false;
   receiverId: string;
+  private _channel: any;
+
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
   });
@@ -27,9 +30,13 @@ export class ChatPage implements OnInit {
     private loadingController: LoadingController,
     private chatService: ChatService,
     private authService: AuthService,
-  ) { }
+    private _pusherService: PusherService
+  ) {
 
-  ngOnInit() { }
+  }
+
+  ngOnInit() {
+  }
   ionViewWillEnter() {
     this.authService.user.subscribe(user => {
       if (user) {
@@ -43,6 +50,17 @@ export class ChatPage implements OnInit {
       })
       return routeParams;
     });
+    this._channel = this._pusherService.getPusher().subscribe('chat.1');
+    this.getChannel().bind("App\\Events\\PrivateMessage", data => {
+      console.log(data);
+      if(data){
+        this.messages.push(data.message);
+      }
+    
+    });
+  }
+  getChannel() {
+    return this._channel;
   }
 
   async presentLoading() {
@@ -61,7 +79,7 @@ export class ChatPage implements OnInit {
     this.chatService.sendMessage(receiver, message).subscribe(async response => {
       this.chatForm.controls.message.setValue('');
       await this.loadingController.dismiss('firstLoading');
-      window.location.reload();
+      // window.location.reload();
     }, async error => {
       await this.loadingController.dismiss('firstLoading');
     });
