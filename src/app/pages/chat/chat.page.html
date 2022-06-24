@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="home/meus-chats"></ion-back-button>
     </ion-buttons>
     <ion-title>Chat</ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
-            <div #divToScroll class="message-area">
+            <div #scrollMe  class="message-area">
               <ion-row *ngFor="let message of messages">
                 <ion-col size="12" class="ion-align-items-end">
                   <div *ngIf="message.usuario_id === this.user.id">
@@ -53,7 +53,7 @@
                 <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
                   <mat-form-field appearance="standard">
                     <mat-label>Digite seu texto aqui</mat-label>
-                    <input matInput formControlName="message" placeholder="Sofá Marrom" />
+                    <input matInput #myElement formControlName="message" placeholder="Sofá Marrom" />
                   </mat-form-field>
                   <div class="buttons">
                     <ion-button type="submit" color="secondary" fill="outline">Salvar</ion-button>
